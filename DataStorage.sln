@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Infrastructure", "Web.I
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Web.UI", "Web.UI\Web.UI.esproj", "{6248DF73-0DAC-4837-A1CE-5F6CD9E1E222}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6F7268C6-D54D-4EFE-BF50-A797CE6F9B82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{64BAB782-D9C6-4FE3-ABFB-C29557FB1E08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,5 +42,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1009925C-63FE-47A7-AE74-D16DF16465E9} = {6F7268C6-D54D-4EFE-BF50-A797CE6F9B82}
+		{3D084156-7DF7-4543-9EB8-721CA29C524E} = {6F7268C6-D54D-4EFE-BF50-A797CE6F9B82}
+		{15BBDA32-2825-40E2-A98D-2E42A60DAA97} = {6F7268C6-D54D-4EFE-BF50-A797CE6F9B82}
+		{6248DF73-0DAC-4837-A1CE-5F6CD9E1E222} = {6F7268C6-D54D-4EFE-BF50-A797CE6F9B82}
 	EndGlobalSection
 EndGlobal
