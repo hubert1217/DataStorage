@@ -1,4 +1,12 @@
+using Web.Application.Abstractions.Services;
+using Web.Application.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+//Add DI association
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 // Add services to the container.
 

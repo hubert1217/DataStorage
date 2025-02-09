@@ -13,7 +13,7 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Web.UI", "Web.UI\Web.UI.esp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6F7268C6-D54D-4EFE-BF50-A797CE6F9B82}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{64BAB782-D9C6-4FE3-ABFB-C29557FB1E08}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FBA6200F-B388-46F1-8452-6E53C745CA05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
