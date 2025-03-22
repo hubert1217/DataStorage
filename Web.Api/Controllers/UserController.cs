@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Net;
 using Web.Application.Abstractions.Services;
 using Web.Application.DataTransfer.Response;
@@ -14,7 +15,7 @@ namespace Web.Api.Controllers
         [HttpGet]
         [Route("getUsers")]
         public async Task<ActionResult<List<UserResponseDto>>> GetAll() 
-        { 
+        {
             List<UserModel> models = await userService.GetAll();
             return Ok(models.Select(x=>x.ToDto()));
         }
