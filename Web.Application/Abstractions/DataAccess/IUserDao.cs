@@ -10,5 +10,7 @@ namespace Web.Application.Abstractions.DataAccess
     public interface IUserDao
     {
         Task<List<User>> GetAll();
+
+        Task<User> Insert(string name, string surname, string description);
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using Web.Application.Abstractions.Services;
+using Web.Application.DataTransfer.Request;
 using Web.Application.DataTransfer.Response;
 using Web.Application.Models;
 
@@ -14,10 +15,17 @@ namespace Web.Api.Controllers
 
         [HttpGet]
         [Route("getUsers")]
-        public async Task<ActionResult<List<UserResponseDto>>> GetAll() 
+        public async Task<ActionResult<List<UserResponseDto>>> Get() 
         {
             List<UserModel> models = await userService.GetAll();
             return Ok(models.Select(x=>x.ToDto()));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<UserResponseDto>> Create([FromBody] UserRequestDto request) 
+        { 
+            UserModel model = await userService.Create(request.Name, request.Surname, request.Description);
+            return Ok(model.ToDto());
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Web.Application.Abstractions.DataAccess;
 using Web.Application.Abstractions.Services;
+using Web.Application.Extensions;
 using Web.Application.Models;
 using Web.Domain.Entities;
 
@@ -12,15 +13,31 @@ namespace Web.Application.Services
 {
     public class UserService(IUserDao userDao) : IUserService
     {
+      
         public async Task<List<UserModel>> GetAll() 
         {
-
             List<User> userList = await userDao.GetAll();
+            return UserModel.ToList(userList);
+        }
 
-            var user = new List<UserModel> { new UserModel { Id = 1, Name = "Tomasz", Surname = "Nasiadka", Description = "Rolnik", Email = "Tomasz@wp.pl" } };
+        public async Task<UserModel> Create(string name, string surname, string description)
+        {
+            await ValidateUser(name, surname, description);
+
+            User user = await userDao.Insert(name, surname, description);
+
+            return UserModel.From(user);
+
+        }
+
+        private async Task ValidateUser(string name, string surname, string description)
+        {
+            if (name.IsNullOrWhiteSpace()) 
+            { 
+                throw new ArgumentNullException(nameof(name), "Name cannot be null or empty");
+            }
 
 
-            return user;
         }
     }
 }

@@ -16,5 +16,15 @@ namespace Web.Infrastructure.Database
         {
             return await Context.Users.AsNoTracking().ToListAsync();
         }
+
+        public Task<User> Insert(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> Insert(string name, string surname, string description)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

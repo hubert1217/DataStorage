@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Web.Application.Abstractions.DataAccess;
 using Web.Application.Abstractions.Services;
 using Web.Application.Services;
+using Web.Infrastructure.Database;
 using Web.Infrastructure.Database.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Add DI association
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserDao, UserDao>();
 
 
 // Add services to the container.

@@ -10,5 +10,7 @@ namespace Web.Application.Abstractions.Services
     public interface IUserService
     {
         Task<List<UserModel>> GetAll();
+
+        Task<UserModel> Create(string name, string surname, string description);
     }
 }
