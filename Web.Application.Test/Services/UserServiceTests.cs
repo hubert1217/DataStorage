@@ -9,6 +9,7 @@ using Web.Application.Abstractions.DataAccess;
 using Web.Application.Abstractions.Services;
 using Web.Application.Models;
 using Web.Application.Services;
+using Web.Domain.Entities;
 
 namespace Web.Application.Test.Services
 {
@@ -32,7 +33,7 @@ namespace Web.Application.Test.Services
         }
 
         [Test]
-        public async Task GetAll_Test() 
+        public async Task GetAll_IsEmptyTest() 
         { 
             _userDao.Setup(x => x.GetAll()).ReturnsAsync([]).Verifiable();
 
@@ -42,5 +43,32 @@ namespace Web.Application.Test.Services
 
             _userDao.Verify();
         }
+
+        [Test]
+        public async Task GetAll_IsNotEmptyTest()
+        {
+            _userDao.Setup(x => x.GetAll()).ReturnsAsync(MockedUserList).Verifiable();
+
+            List<UserModel> result = await _service.GetAll();
+
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result[0].Email, Is.EqualTo("TestEmail"));
+
+            _userDao.Verify();
+        }
+
+        private static List<User> MockedUserList =>
+        [
+            new()
+            {
+                Id = 1,
+                FirstName = "Test",
+                LastName = "Test",
+                Email = "TestEmail",
+                PhoneNumber = "1234567890",
+
+            }
+        ];
+
     }
 }
