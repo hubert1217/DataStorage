@@ -7,6 +7,16 @@ using Web.Infrastructure.Database.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:59311") // Dostosuj do swojego frontendu
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
 
 //Add DI association
 builder.Services.AddScoped<IUserService, UserService>();
@@ -28,6 +38,8 @@ builder.Services.AddDbContext<DataStorageAppContext>(options =>
 
 
 var app = builder.Build();
+
+app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

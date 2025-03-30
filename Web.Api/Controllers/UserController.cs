@@ -14,7 +14,7 @@ namespace Web.Api.Controllers
     {
 
         [HttpGet]
-        [Route("getUsers")]
+        [Route("getAll")]
         public async Task<ActionResult<List<UserResponseDto>>> Get() 
         {
             List<UserModel> models = await userService.GetAll();

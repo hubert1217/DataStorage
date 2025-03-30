@@ -13,8 +13,8 @@ namespace Web.Application.Models
     public class UserModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Description { get; set; }
         public string Email { get; set; }
 
@@ -24,8 +24,8 @@ namespace Web.Application.Models
             return new UserResponseDto          
             {
                 Id = Id,
-                Name = Name,
-                Surname = Surname,
+                FirstName = FirstName,
+                LastName = LastName,
                 Description = Description,
                 Email = Email
             };
@@ -36,8 +36,9 @@ namespace Web.Application.Models
             return users.Select(x => new UserModel 
             { 
                 Id = x.Id,
-                Name = x.FirstName,
-                Surname = x.LastName,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Description = x.Description,
                 Email = x.Email
 
             }).ToList();
@@ -48,8 +49,10 @@ namespace Web.Application.Models
             return new UserModel
             {
                 Id = user.Id,
-                Name = user.FirstName,
-                Surname = user.LastName
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Description = user.Description,
+                Email= user.Email
             };
         } 
 
