@@ -1,7 +1,7 @@
 export interface UserState {
     users: User[];
+    isUserListLoading: boolean;
 }
-
 
 export interface User {
     id: number;
