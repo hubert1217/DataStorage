@@ -21,11 +21,30 @@ namespace Web.Api.Controllers
             return Ok(models.Select(x=>x.ToDto()));
         }
 
-        [HttpPost]
-        public async Task<ActionResult<UserResponseDto>> Create([FromBody] UserRequestDto request) 
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<ActionResult<UserResponseDto>> Update(int id, [FromBody] UserUpdateRequestDto request) 
         { 
-            UserModel model = await userService.Create(request.Name, request.Surname, request.Description);
+            UserModel model = await userService.Update(id, request.FirstName, request.LastName, request.Description, request.Email);
             return Ok(model.ToDto());
         }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<ActionResult<UserResponseDto>> Create([FromBody] UserCreateRequestDto request)
+        {
+            UserModel model = await userService.Create(request.FirstName, request.LastName, request.Description, request.Email);
+            return Ok(model.ToDto());
+        }
+
+        [HttpPost]
+        [Route("delete/{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await userService.Delete(id);
+            return NoContent();
+        }
+
+
     }
 }

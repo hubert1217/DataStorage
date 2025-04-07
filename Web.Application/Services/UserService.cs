@@ -20,15 +20,15 @@ namespace Web.Application.Services
             return UserModel.ToList(userList);
         }
 
-        public async Task<UserModel> Create(string name, string surname, string description)
-        {
-            await ValidateUser(name, surname, description);
+        //public async Task<UserModel> Create(string name, string surname, string description)
+        //{
+        //    await ValidateUser(name, surname, description);
 
-            User user = await userDao.Insert(name, surname, description);
+        //    User user = await userDao.Insert(name, surname, description);
 
-            return UserModel.From(user);
+        //    return UserModel.From(user);
 
-        }
+        //}
 
         private async Task ValidateUser(string name, string surname, string description)
         {
@@ -38,6 +38,21 @@ namespace Web.Application.Services
             }
 
 
+        }
+
+        public async Task<UserModel> Update(int id, string firstName, string lastName, string description, string email)
+        {
+            return new UserModel();
+        }
+
+        public async Task<UserModel> Create(string firstName, string lastName, string description, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
