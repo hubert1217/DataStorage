@@ -11,6 +11,6 @@ namespace Web.Application.Abstractions.Services
     {
         Task<List<Meter>> GetAll();
         Task<Meter> GetById(int id);
-        Task<Meter> GetBySerialNumber(string serialNumber);
+        Task<List<Meter>> GetBySerialNumber(string serialNumber);
     }
 }

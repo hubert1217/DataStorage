@@ -11,7 +11,10 @@ namespace Web.Application.Abstractions.DataAccess
     {
         Task<List<Meter>> GetAll();
         Task<Meter> GetById(int id);
-        Task<Meter> GetBySerialNumber(string serialNumber);
+        Task<List<Meter>> GetBySerialNumber(string serialNumber);
+        Task<Meter> Insert(Meter meter);
+        Task<Meter> Update(int id, Meter meter);
+        Task Delete(int id);
 
     }
 }

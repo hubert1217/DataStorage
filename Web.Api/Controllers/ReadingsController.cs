@@ -17,5 +17,20 @@ namespace Web.Api.Controllers
             var models = await readingService.GetAll();
             return Ok();
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult> Get([FromRoute] int id)
+        {
+            var models = await readingService.GetById(id);
+            return Ok(models);
+        }
+
+        [HttpGet("by-date")]
+        public async Task<ActionResult> GetByDate([FromQuery] DateTime date)
+        {
+            var models = await readingService.GetByDate(date);
+            return Ok(models);
+        }
     }
 }

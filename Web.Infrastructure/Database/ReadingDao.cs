@@ -17,14 +17,19 @@ namespace Web.Infrastructure.Database
             return await Context.Readings.Include(r=>r.Meter).ThenInclude(m=>m.Type).ToListAsync();
         }
 
-        public Task<Reading> GetById(int id)
+        public async Task<Reading> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await Context.Readings.Where(r=>r.Id==id).FirstAsync();
         }
 
-        public Task<List<Reading>> GetByDate(DateTime date)
+        public async Task<List<Reading>> GetByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            var startDate = new DateTime(date.Year, date.Month, 1);
+            var endDate = startDate.AddMonths(1);
+
+            return await Context.Readings
+                .Where(r => r.Date >= startDate && r.Date < endDate)
+                .ToListAsync();
         }
 
 

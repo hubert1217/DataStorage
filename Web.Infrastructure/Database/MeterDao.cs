@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,29 +13,44 @@ namespace Web.Infrastructure.Database
 {
     public class MeterDao(DataStorageAppContext context): BaseDao<MeterDao>(context), IMeterDao
     {
-        public Task GetAll()
+        public async Task<List<Meter>> GetAll()
         {
-            throw new NotImplementedException();
+            return await Context.Meters.ToListAsync();
         }
 
-        public Task<Meter> GetById(int id)
+        public async Task<Meter> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await Context.Meters.Where(m => m.Id == id).FirstAsync();
         }
 
-        public Task<Meter> GetBySerialNumber(string serialNumber)
+        public async Task<List<Meter>> GetBySerialNumber(string serialNumber)
         {
-            throw new NotImplementedException();
+            return await Context.Meters.Where(m=>m.SerialNumber.Contains(serialNumber)).ToListAsync();
         }
 
-        public async Task<List<Meter>> GetMeters() 
-        { 
-            return await Context.Meters.AsNoTracking().ToListAsync();
+        public async Task<Meter> Insert(Meter meter)
+        {
+            var entry = await Context.Meters.AddAsync(meter);
+            await Context.SaveChangesAsync();
+            return entry.Entity;
         }
 
-        Task<List<Meter>> IMeterDao.GetAll()
+        public async Task<Meter> Update(int id, Meter meter)
         {
-            throw new NotImplementedException();
+            var update = await GetById(id);
+
+            update.SerialNumber = meter.SerialNumber;
+            update.Address = meter.Address;
+            Context.Meters.Update(update);
+            await Context.SaveChangesAsync();
+            return update;
+        }
+
+        public async Task Delete(int id)
+        {
+            var delete = await GetById(id);
+            Context.Meters.Remove(delete);
+            await Context.SaveChangesAsync();
         }
     }
 }

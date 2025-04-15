@@ -11,5 +11,6 @@ namespace Web.Application.Abstractions.Services
     {
         Task<List<Reading>> GetAll();
         Task<Reading> GetById(int id);
+        Task<List<Reading>> GetByDate(DateTime date);
     }
 }

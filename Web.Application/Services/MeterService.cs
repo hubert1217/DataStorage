@@ -22,7 +22,7 @@ namespace Web.Application.Services
             return await meterDao.GetById(id);
         }
 
-        public async Task<Meter> GetBySerialNumber(string serialNumber) 
+        public async Task<List<Meter>> GetBySerialNumber(string serialNumber) 
         {
             return await meterDao.GetBySerialNumber(serialNumber);
         }
