@@ -11,9 +11,8 @@ namespace Web.Domain.Entities
         public int Id { get; set; }
         public int AddressId { get; set; }
         public int TypeId { get; set; }
-        public string SerialNumber { get; set; }
-
+        public required string SerialNumber { get; set; }
         public virtual Address Address { get; set; }
-        public virtual MeterType MeterTypes { get; set; }
+        public virtual MeterType Type { get; set; }
     }
 }

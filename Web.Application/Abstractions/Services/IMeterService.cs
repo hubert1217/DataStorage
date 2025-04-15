@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Web.Domain.Entities;
 
-namespace Web.Application.Abstractions.DataAccess
+namespace Web.Application.Abstractions.Services
 {
-    public interface IMeterDao
+    public interface IMeterService
     {
         Task<List<Meter>> GetAll();
         Task<Meter> GetById(int id);
         Task<Meter> GetBySerialNumber(string serialNumber);
-
     }
 }

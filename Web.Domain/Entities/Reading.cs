@@ -9,7 +9,7 @@ namespace Web.Domain.Entities
     public class Reading
     {
         public int Id { get; set; }
-        public string MeterId { get; set; }
+        public int MeterId { get; set; }
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
 

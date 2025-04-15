@@ -50,7 +50,12 @@ namespace Web.Api.Configuration
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IReadingService, ReadingService>();
+            services.AddScoped<IMeterService, MeterService>();
+
             services.AddScoped<IUserDao, UserDao>();
+            services.AddScoped<IReadingDao, ReadingDao>();
+            services.AddScoped<IMeterDao, MeterDao>();
 
             return services;
         }

@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Web.Domain.Entities;
 
-namespace Web.Application.Abstractions.DataAccess
+namespace Web.Application.Abstractions.Services
 {
-    public interface IReadingDao
+    public interface IReadingService
     {
         Task<List<Reading>> GetAll();
         Task<Reading> GetById(int id);
-        Task<List<Reading>> GetByDate(DateTime date);
     }
 }

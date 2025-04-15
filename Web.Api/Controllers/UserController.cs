@@ -10,7 +10,7 @@ namespace Web.Api.Controllers
 {
     [Route("users")]
     [ApiController]
-    public class UserController(IUserService userService) : Controller
+    public class UserController(IUserService userService) : ControllerBase
     {
 
         [HttpGet]
