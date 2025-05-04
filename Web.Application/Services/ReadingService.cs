@@ -6,25 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using Web.Application.Abstractions.DataAccess;
 using Web.Application.Abstractions.Services;
+using Web.Application.Models;
 using Web.Domain.Entities;
 
 namespace Web.Application.Services
 {
     public class ReadingService(IReadingDao readingDao) : IReadingService
     {
-        public async Task<List<Reading>> GetAll()
+        public async Task<List<ReadingModel>> GetAll()
         {
-            return await readingDao.GetAll();
+            List<Reading> readings = await readingDao.GetAll();
+            return ReadingModel.ToList(readings);
         }
 
-        public async Task<Reading> GetById(int id) 
+        public async Task<ReadingModel> GetById(int id) 
         {
-            return await readingDao.GetById(id);
+            Reading reading = await readingDao.GetById(id);
+            return ReadingModel.From(reading);
         }
 
-        public async Task<List<Reading>> GetByDate(DateTime date) 
+        public async Task<List<ReadingModel>> GetByDate(DateTime date) 
         {
-            return await readingDao.GetByDate(date);
+            List<Reading> readings = await readingDao.GetByDate(date);
+            return ReadingModel.ToList(readings);
         }
     }
 }

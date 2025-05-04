@@ -21,14 +21,12 @@ namespace Web.Application.Models
 
         public UserResponseDto ToDto() 
         {
-            return new UserResponseDto          
-            {
-                Id = Id,
-                FirstName = FirstName,
-                LastName = LastName,
-                Description = Description,
-                Email = Email
-            };
+            return new UserResponseDto(
+                Id,
+                FirstName,
+                LastName,
+                Description,
+                Email);          
         }
 
         public static List<UserModel> ToList(List<User> users) 

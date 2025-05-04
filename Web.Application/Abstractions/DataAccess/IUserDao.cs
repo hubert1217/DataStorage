@@ -11,6 +11,6 @@ namespace Web.Application.Abstractions.DataAccess
     {
         Task<List<User>> GetAll();
 
-        Task<User> Insert(string name, string surname, string description);
+        Task<User> Insert(User user);
     }
 }

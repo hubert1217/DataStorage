@@ -12,25 +12,25 @@ namespace Web.Api.Controllers
     {
         [HttpGet]
         [Route("getAll")]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult<List<ReadingResponseDto>>> GetAll()
         {
             var models = await readingService.GetAll();
-            return Ok();
+            return Ok(models.Select(x=>x.ToResponseDto()));
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> Get([FromRoute] int id)
+        public async Task<ActionResult<ReadingResponseDto>> Get([FromRoute] int id)
         {
             var models = await readingService.GetById(id);
-            return Ok(models);
+            return Ok(models.ToResponseDto());
         }
 
         [HttpGet("by-date")]
-        public async Task<ActionResult> GetByDate([FromQuery] DateTime date)
+        public async Task<ActionResult<List<ReadingResponseDto>>> GetByDate([FromQuery] DateTime date)
         {
             var models = await readingService.GetByDate(date);
-            return Ok(models);
+            return Ok(models.Select(r=>r.ToResponseDto()));
         }
     }
 }

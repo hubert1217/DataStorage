@@ -10,21 +10,12 @@ using Web.Infrastructure.Database.Context;
 
 namespace Web.Infrastructure.Database
 {
-    public class UserDao(DataStorageAppContext context) : BaseDao<UserDao>(context), IUserDao
+    public class UserDao(DataStorageAppContext context) : BaseDao<User>(context), IUserDao
     {
-        public async Task<List<User>> GetAll()
+        public override async Task<User> Insert(User user)
         {
-            return await Context.Users.AsNoTracking().ToListAsync();
-        }
-
-        public Task<User> Insert(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Insert(string name, string surname, string description)
-        {
-            throw new NotImplementedException();
+            var entity = await base.Insert(user);
+            return entity;
         }
     }
 }
