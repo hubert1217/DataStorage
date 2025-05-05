@@ -10,11 +10,35 @@ namespace Web.Domain.Entities
     public class User : IBaseEntity
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Description { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
+        public string? Description { get; set; }
+        public required string Email { get; set; }
+        public string? PhoneNumber { get; set; }
+
+
+        public static User Create(string firstName, string lastName, string description, string email) 
+        {
+            return new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Description = description,
+                Email = email,
+            };
+        }
+
+        public static User Update(int id, string firstName, string lastName, string description, string email)
+        {
+            return new User
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+                Description = description,
+                Email = email,
+            };
+        }
 
     }
 }

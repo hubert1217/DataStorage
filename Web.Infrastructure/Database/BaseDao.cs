@@ -26,7 +26,7 @@ namespace Web.Infrastructure.Database
 
         public virtual async Task<TEntity> GetById(int id)
         {
-            var entity = await Context.Set<TEntity>().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var entity = await Context.Set<TEntity>().Where(x => x.Id == id).FirstAsync();
             if (entity == null)
             {
                 throw new KeyNotFoundException($"{typeof(TEntity).Name} with id {id} not found.");
@@ -37,9 +37,6 @@ namespace Web.Infrastructure.Database
 
         public virtual async Task<TEntity> Update(int id, TEntity update) 
         {
-            if (id != update.Id)
-                throw new ArgumentException("ID mismatch between route and entity");
-
             var entity = await GetById(id);
             Context.Entry(entity).CurrentValues.SetValues(update);
             await Context.SaveChangesAsync();

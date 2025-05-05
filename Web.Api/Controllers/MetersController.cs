@@ -15,7 +15,7 @@ namespace Web.Api.Controllers
         public async Task<ActionResult> GetAll()
         {
             var models = await meterService.GetAll();
-            return Ok();
+            return Ok(models);
         }
 
         [HttpGet]

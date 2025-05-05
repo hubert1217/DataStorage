@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using Web.Application.Abstractions.Services;
@@ -17,8 +18,16 @@ namespace Web.Api.Controllers
         [Route("getAll")]
         public async Task<ActionResult<List<UserResponseDto>>> Get() 
         {
-            List<UserModel> models = await userService.GetAll();
-            return Ok(models.Select(x=>x.ToDto()));
+            try
+            {
+                List<UserModel> models = await userService.GetAll();
+                return Ok(models.Select(x => x.ToDto()));
+            }
+            catch (Exception ex) 
+            { 
+                return Ok(ex.Message);
+            }
+            
         }
 
         [HttpPut]
@@ -31,10 +40,13 @@ namespace Web.Api.Controllers
 
         [HttpPost]
         [Route("create")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UserResponseDto>> Create([FromBody] UserCreateRequestDto request)
         {
             UserModel model = await userService.Create(request.FirstName, request.LastName, request.Description, request.Email);
             return Ok(model.ToDto());
+
         }
 
         [HttpPost]

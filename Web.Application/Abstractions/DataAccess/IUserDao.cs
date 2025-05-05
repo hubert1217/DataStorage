@@ -10,7 +10,9 @@ namespace Web.Application.Abstractions.DataAccess
     public interface IUserDao
     {
         Task<List<User>> GetAll();
-
+        Task<User> GetById(int id);
         Task<User> Insert(User user);
+        Task<User> Update(int id, User user);
+        Task Delete(int id);
     }
 }

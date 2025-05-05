@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Web.Application.Abstractions.DataAccess;
+﻿using Web.Application.Abstractions.DataAccess;
 using Web.Application.Abstractions.Services;
 using Web.Application.Services;
+using Web.Application.Validation;
 using Web.Infrastructure.Configuration;
 using Web.Infrastructure.Database;
-using Web.Infrastructure.Database.Context;
+using FluentValidation;
 
 namespace Web.Api.Configuration
 {
@@ -57,7 +57,11 @@ namespace Web.Api.Configuration
             services.AddScoped<IReadingDao, ReadingDao>();
             services.AddScoped<IMeterDao, MeterDao>();
 
+            services.AddValidatorsFromAssemblyContaining<UserValidator>();
+
             return services;
         }
+
+        
     }
 }
