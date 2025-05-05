@@ -51,6 +51,12 @@ namespace Web.Api.Configuration
                     //    context.Response.ContentType = "application/json";
                     //    await context.Response.WriteAsJsonAsync(applicationException.Message);
                     //}
+                    else if (exception is KeyNotFoundException keyNotFoundException)
+                    {
+                        context.Response.StatusCode = StatusCodes.Status404NotFound;
+                        context.Response.ContentType = "application/json";
+                        await context.Response.WriteAsJsonAsync(keyNotFoundException.Message);
+                    }
                     else
                     {
                         // Dla wszystkich innych wyjątków zwracamy 500 Internal Server Error

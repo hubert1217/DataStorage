@@ -12,9 +12,11 @@ namespace Web.Application.Models
     public class ReadingModel
     {
         public int Id { get; set; }
-        public int MeterId { get; set; }
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
+        public string Type { get; set; }
+        public string Unit { get; set; }
+        public string SerialNumber { get; set; }
 
 
         public static List<ReadingModel> ToList(List<Reading> readings) 
@@ -22,9 +24,11 @@ namespace Web.Application.Models
             return readings.Select(r=> new ReadingModel 
             { 
                 Id = r.Id,
-                MeterId = r.MeterId,
                 Date = r.Date,
-                Value = r.Value
+                Value = r.Value,
+                Type = r.Meter.Type.Name,
+                Unit = r.Meter.Type.Unit,
+                SerialNumber = r.Meter.SerialNumber,
             }).ToList();
         }
 
@@ -33,7 +37,6 @@ namespace Web.Application.Models
             return new ReadingModel
             {
                 Id = reading.Id,
-                MeterId = reading.MeterId,
                 Date = reading.Date,
                 Value = reading.Value
             };
@@ -43,9 +46,11 @@ namespace Web.Application.Models
         {
             return new ReadingResponseDto(
                 Id,
-                MeterId,
                 Date,
-                Value);
+                Value,
+                Type,
+                Unit,
+                SerialNumber);
         }
     }
 }

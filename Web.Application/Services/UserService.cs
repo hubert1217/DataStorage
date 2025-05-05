@@ -21,6 +21,12 @@ namespace Web.Application.Services
             return UserModel.ToList(userList);
         }
 
+        public async Task<UserModel> GetById(int id)
+        {
+            User user = await userDao.GetById(id);
+            return UserModel.From(user);
+        }
+
         public async Task<UserModel> Update(int id, string firstName, string lastName, string description, string email)
         {
             UserModel request = await ValidateUser(id, firstName, lastName, description, email);

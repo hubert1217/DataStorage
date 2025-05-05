@@ -15,8 +15,11 @@ namespace Web.Infrastructure.Database
         protected override IQueryable<Reading> GetQueryable()
         {
             return Context.Readings
-                .Include(r => r.Meter)
-                    .ThenInclude(m => m.Type)
+                .Include(m => m.Meter)
+                    .ThenInclude(t => t.Type)
+                .Include(m => m.Meter)
+                    .ThenInclude(a => a.Address)
+                    .ThenInclude(u => u.User)
                 .AsNoTracking();
         }
 

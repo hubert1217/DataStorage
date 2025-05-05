@@ -8,7 +8,9 @@ namespace Web.Application.DataTransfer.Response
 {
     public record ReadingResponseDto(
         int Id,
-        int MeterId,
         DateTime Date,
-        decimal Value);
+        decimal Value,
+        string Type,
+        string Unit,
+        string SerialNumber);
 }

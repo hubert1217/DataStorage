@@ -15,7 +15,7 @@ namespace Web.Api.Controllers
         public async Task<ActionResult<List<ReadingResponseDto>>> GetAll()
         {
             var models = await readingService.GetAll();
-            return Ok(models.Select(x=>x.ToResponseDto()));
+            return Ok(models.Select(x => x.ToResponseDto()));      
         }
 
         [HttpGet]
