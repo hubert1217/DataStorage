@@ -26,7 +26,7 @@ namespace Web.Infrastructure.Database
 
         public virtual async Task<TEntity> GetById(int id)
         {
-            var entity = await Context.Set<TEntity>().Where(x => x.Id == id).FirstAsync();
+            var entity = await Context.Set<TEntity>().Where(x => x.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {
                 throw new KeyNotFoundException($"{typeof(TEntity).Name} with id {id} not found.");
