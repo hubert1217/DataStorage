@@ -17,7 +17,7 @@ namespace Web.Domain.Entities
         public string? PhoneNumber { get; set; }
 
 
-        public static User Create(string firstName, string lastName, string description, string email) 
+        public static User Create(string firstName, string lastName, string? description, string email) 
         {
             return new User
             {
@@ -28,7 +28,7 @@ namespace Web.Domain.Entities
             };
         }
 
-        public static User Update(int id, string firstName, string lastName, string description, string email)
+        public static User Update(int id, string firstName, string lastName, string? description, string email)
         {
             return new User
             {

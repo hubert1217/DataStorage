@@ -14,6 +14,6 @@ namespace Web.Domain.Entities
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
 
-        public virtual Meter Meter { get; set; }
+        public required virtual Meter Meter { get; set; }
     }
 }

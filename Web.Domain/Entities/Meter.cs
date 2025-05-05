@@ -13,7 +13,7 @@ namespace Web.Domain.Entities
         public int AddressId { get; set; }
         public int TypeId { get; set; }
         public required string SerialNumber { get; set; }
-        public virtual Address Address { get; set; }
-        public virtual MeterType Type { get; set; }
+        public required virtual Address Address { get; set; }
+        public required virtual MeterType Type { get; set; }
     }
 }

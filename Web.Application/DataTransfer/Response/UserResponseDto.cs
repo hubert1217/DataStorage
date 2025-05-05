@@ -10,6 +10,6 @@ namespace Web.Application.DataTransfer.Response
         int Id,
         string FirstName,
         string LastName,
-        string Description,
+        string? Description,
         string Email);
 }

@@ -13,10 +13,10 @@ namespace Web.Application.Models
     public class UserModel
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Description { get; set; }
-        public string Email { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
+        public string? Description { get; set; }
+        public required string Email { get; set; }
 
 
         public UserResponseDto ToDto() 
@@ -26,7 +26,7 @@ namespace Web.Application.Models
                 FirstName,
                 LastName,
                 Description,
-                Email);          
+                Email);        
         }
 
         public static List<UserModel> ToList(List<User> users) 

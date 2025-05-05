@@ -14,9 +14,9 @@ namespace Web.Application.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
-        public string Type { get; set; }
-        public string Unit { get; set; }
-        public string SerialNumber { get; set; }
+        public required string Type { get; set; }
+        public required string Unit { get; set; }
+        public required string SerialNumber { get; set; }
 
 
         public static List<ReadingModel> ToList(List<Reading> readings) 
@@ -38,7 +38,10 @@ namespace Web.Application.Models
             {
                 Id = reading.Id,
                 Date = reading.Date,
-                Value = reading.Value
+                Value = reading.Value,
+                Type = reading.Meter.Type.Name,
+                Unit = reading.Meter.Type.Unit,
+                SerialNumber = reading.Meter.SerialNumber,
             };
         }
 
