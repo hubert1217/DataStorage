@@ -16,22 +16,30 @@ import {
   faSortDown,
   faSortUp,
 } from "@fortawesome/free-solid-svg-icons";
-import EditUserModal from "../Modals/EditUserModal";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import userActions from "../../../store/user/actions";
+import UpsertUserModal from "../Modals/UpsertUserModal";
+import ConfirmationModal from "../../shared/Modal/ConfirmationModal";
 
 const UsersTable = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => userSelectors.selectUsers(state));
   const user = useAppSelector((state) => userSelectors.selectUser(state));
+  const isDeleteUserLoading = useAppSelector((state) => userSelectors.selectIsDeleteUserLoading(state));
   const isUserListLoading = useAppSelector((state) =>
     userSelectors.selectIsUserListLoading(state)
   );
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isUpsertModalOpen, setIsUpsertModalOpen] = useState(false);
+  const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] = useState(false);
+  const [deleteUser, setDeleteUser] = useState<User|null>(null);
+  const handleDelete = (user: User) => {
+    setDeleteUser(user);
+    setIsDeleteConfirmationModalOpen(true)
+  };
 
-  const handleEdit = (user: User) => {
-    setIsEditModalOpen(true);
-    dispatch(userActions.selectUser(user as User));
+  const handleUpsert = (user: User | undefined) => {
+    setIsUpsertModalOpen(true);
+    dispatch(userActions.selectUser(user));
   };
 
   const columns = useMemo<ColumnDef<User, any>[]>(() => {
@@ -58,11 +66,32 @@ const UsersTable = () => {
       },
       {
         id: "Actions",
-        header: "Actions",
+        header: () => (
+          <div>
+            <b>Action</b>
+            <button
+              onClick={() => handleUpsert(undefined)}
+              className="btn btn-light btn-sm ms-3"
+            >
+              Add new user
+            </button>
+          </div>
+        ),
+        // header: "Actions",
         cell: ({ row }) => (
           <div className="d-flex gap-1">
-            <button className="btn btn-primary btn-sm" onClick={() => handleEdit(row.original)}>Edit</button>
-            <button className="btn btn-danger btn-sm" onClick={() => handleDelete(row.original.id)}>Delete</button>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() => handleUpsert(row.original)}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => handleDelete(row.original)}
+            >
+              Delete
+            </button>
           </div>
         ),
         enableSorting: false,
@@ -165,11 +194,20 @@ const UsersTable = () => {
           </tbody>
         )}
       </Table>
-      <EditUserModal
-        showModal={isEditModalOpen}
-        handleClose={() => setIsEditModalOpen(false)}
+      <UpsertUserModal
+        showModal={isUpsertModalOpen}
+        handleClose={() => setIsUpsertModalOpen(false)}
         user={user ?? undefined}
       />
+      <ConfirmationModal 
+        message={"Are you sure delete record?"} 
+        isModalLoading={isDeleteUserLoading} 
+        showModal={isDeleteConfirmationModalOpen} 
+        handleClose={()=> setIsDeleteConfirmationModalOpen(false)}
+        onConfirm={()=>{
+          dispatch(userActions.deleteUser({ id: deleteUser?.id! })).then(()=>setIsDeleteConfirmationModalOpen(false));
+        }}
+      ></ConfirmationModal>
     </>
   );
 };

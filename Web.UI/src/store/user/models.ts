@@ -5,7 +5,8 @@ export interface UserState extends UserLoadingState {
 
 interface UserLoadingState {
   isUserListLoading: boolean;
-  isUpdateUserLoading: boolean;
+  isUpsertUserLoading: boolean;
+  isDeleteUserLoading: boolean;
 }
 
 export interface User {

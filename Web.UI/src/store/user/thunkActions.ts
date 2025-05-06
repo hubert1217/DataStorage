@@ -32,3 +32,31 @@ export const update = createAsyncThunk(
     );
   }
 );
+
+export const add = createAsyncThunk(
+  "User/add",
+  async (
+    {
+      firstName,
+      lastName,
+      description,
+      email,
+    }: {
+      firstName: string;
+      lastName: string;
+      description: string;
+      email: string;
+    },
+    thunkApi
+  ) => {
+    return await UsersClient.add(firstName, lastName, description, email);
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "User/delete",
+  async ({ id }: { id: number }, thunkApi) => {
+    await UsersClient.delete(id)
+    return id ;
+  }
+);
