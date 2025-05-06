@@ -54,12 +54,12 @@ namespace Web.Api.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("delete/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> Delete(int id)
         {
-            await userService.Delete(id);
+            //await userService.Delete(id);
             return NoContent();
         }
 
